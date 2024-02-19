@@ -16,7 +16,7 @@ tower.load = function()
         reticleX = tower.sprites.reticleBlue:getWidth() * 0.5,
         reticleY = tower.sprites.reticleBlue:getHeight() * 0.5
     }
-    
+    tower.offsette = tower.sprites.tower:getWidth() * 0.5
     tower.pos = newVector((love.graphics.getWidth() * 0.5), (love.graphics.getHeight() * 0.5))
     tower.angle = 0
     tower.gunAngle = 0
@@ -28,12 +28,8 @@ tower.load = function()
     tower.reticleAngle = 0
 end
 
-tower.aim = function(x,y)
-    tower.gunAngle = math.atan2((y - tower.pos.y), (x - tower.pos.x))
-end
-
-tower.rotation = function(dt, direction)
-    tower.angle = tower.angle + math.pi * dt * direction
+tower.aim = function(mouseX,mouseY)
+    tower.gunAngle = math.atan2((mouseY - tower.pos.y), (mouseX - tower.pos.x))
 end  
 
 tower.shoot = function()
@@ -52,6 +48,8 @@ end
 tower.update = function(dt)
     
     tower.shootingTimer = tower.shootingTimer - dt
+    tower.aim(mouseX,mouseY)
+    tower.shoot()
     checkCollisions()
 
 end
@@ -75,7 +73,7 @@ tower.keypressed = function(key)
     end
 end
 
-tower.loseHP = function()
+tower.takeDamage = function()
     tower.hitPoints = tower.hitPoints - 1
 end
 
@@ -84,6 +82,7 @@ tower.upgrade = function()
     tower.fireRate = tower.fireRate * 0.97
 end
 
+--calling functions
 checkCollisions = function()
     local enemies = getEnemies()
     local bullets = getBullets()
@@ -124,5 +123,46 @@ checkCollisions = function()
 
 end
 
-return tower
+loadTower = function()
+    tower.load()
+end
+
+updateTower = function(dt)
+    tower.update(dt)
+end
+
+drawTower = function()
+    tower.draw()
+end
+
+keypressedTower = function(key)
+    tower.keypressed(key)
+end
+
+upgradeTower = function()
+    tower.upgrade()
+end
+
+takeDamage = function()
+    tower.takeDamage()
+end
+
+--getters
+getTowerHitpoints = function()
+    return tower.hitPoints
+end
+
+getTowerColor = function()
+    return tower.color
+end
+
+getTowerOffset = function()
+    return tower.offsette
+end
+
+getTowerPos = function()
+    return tower.pos
+end
+
+
 

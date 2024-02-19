@@ -5,13 +5,7 @@ io.stdout:setvbuf("no")
 
 local gameplay = {}
 
-require("settings")
-require("vecteur2")
-local mTower = require("tower")
-require("enemies")
-require("bullets")
-require("waves")
-require("sidekick")
+
 
 
 gameplay.load = function()
@@ -28,7 +22,7 @@ gameplay.load = function()
 
 
     settings.load()
-    mTower.load()
+    loadTower()
     loadSidekick()
     purgeEnemiesList()
     purgeBulletList()
@@ -61,15 +55,14 @@ gameplay.update = function(dt)
     end
 
     if isGamePaused == false then
-        mTower.aim(mouseX, mouseY)
-        mTower.update(dt)
-        mTower.shoot()  
+        updateTower(dt)
         updateBullets(dt)
         updateEnemies(dt)
         updateSidekick(dt)
     end
 
-    if mTower.hitPoints <= 0 then
+    towerHitPoints = getTowerHitpoints()
+    if towerHitPoints <= 0 then
         currentState = "dead"
     end
 
@@ -79,12 +72,12 @@ gameplay.update = function(dt)
 end
 
 gameplay.keypressed = function(key)
-    mTower.keypressed(key)
+    keypressedTower(key)
     if key == "space" then
         if currentState == "upgrade" then
             waveLaunch(currentWave)
             upgradeSidekick()
-            mTower.upgrade()
+            upgradeTower()
             currentState = "fighting"
         end
     end
@@ -101,10 +94,10 @@ end
 gameplay.draw = function()
 
     settings.draw()
-    mTower.draw()
+    drawTower()
     love.graphics.setColor(0, 0, 0)
     love.graphics.setFont(settings.customFont14)
-    love.graphics.print(mTower.hitPoints,settings.screenCenterX-10,settings.screenCenterY-5)
+    love.graphics.print(towerHitPoints,settings.screenCenterX-10,settings.screenCenterY-5)
     love.graphics.setColor(1, 1, 1)
     drawBullets()
     drawEnemies()

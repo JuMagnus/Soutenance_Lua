@@ -1,5 +1,4 @@
 
-local mTower = require("tower")
 
 
 local bullets = {}
@@ -22,7 +21,7 @@ newBullet = function(x, y)
     bullet.pos = newVector(settings.screenCenterX, settings.screenCenterY)
     bullet.direction = newVector(x, y) - bullet.pos
     bullet.speed = 400
-    bullet.color = mTower.color
+    bullet.color = getTowerColor()
     bullet.isFree = false
 
 

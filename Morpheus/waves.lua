@@ -1,5 +1,5 @@
 
-require("vecteur2")
+
 
 local wavesComposition = {
     {1, 2, 2},

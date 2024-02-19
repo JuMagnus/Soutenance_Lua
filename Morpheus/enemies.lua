@@ -1,6 +1,5 @@
 
 
-local mTower = require("tower")
 
 math.dist = function(x1,y1, x2,y2)
     return math.sqrt((x2-x1)^2+(y2-y1)^2) 
@@ -25,7 +24,8 @@ createEnemy = function(color)
         x = enemy.spriteWidth * 0.5,
         y = enemy.spriteHeight * 0.5
     }
-
+    enemy.towerPos = getTowerPos()
+    enemy.towerOffset = getTowerOffset()
     local rand = love.math.random()
     local tempX = 0
     local tempY = 0
@@ -45,7 +45,7 @@ createEnemy = function(color)
     end
 
     enemy.pos = newVector(tempX, tempY)
-    enemy.direction = mTower.pos - enemy.pos
+    enemy.direction = enemy.towerPos - enemy.pos
     enemy.norm = enemy.direction.normalize()
     enemy.speed = 70
     enemy.hitPoints = 5
@@ -60,13 +60,13 @@ createEnemy = function(color)
     enemy.update = function(dt)
         if #enemiesList ~= nil and enemy.isFree == false then
             enemy.pos = enemy.pos + enemy.norm * dt * enemy.speed
-            enemy.dist = math.dist(enemy.pos.x,enemy.pos.y, mTower.pos.x,mTower.pos.y)
+            enemy.dist = math.dist(enemy.pos.x,enemy.pos.y, enemy.towerPos.x,enemy.towerPos.y)
         end
         
-        if enemy.dist < mTower.offset.x and enemy.isFree == false then
+        if enemy.dist < enemy.towerOffset and enemy.isFree == false then
             enemy.isFree = true
             currentEnemies = currentEnemies - 1
-            mTower.loseHP()
+            takeDamage()
 
         end
     end

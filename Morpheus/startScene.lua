@@ -8,6 +8,7 @@ local start = {}
 
 start.load = function()
     settings.load()
+    towerPos = getTowerPos()
 end
 
 start.update = function()

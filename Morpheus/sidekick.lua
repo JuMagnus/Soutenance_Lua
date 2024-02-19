@@ -1,33 +1,35 @@
-local mTower = require("tower")
 
 local sidekick = {}
 
 sidekick.load = function()
     sidekick.sprite = love.graphics.newImage("images/sidekick.png")
     sidekick.offset = sidekick.sprite:getWidth() * 0.5
+
+    sidekick.distance = 150
+    sidekick.angle = 0
+    sidekick.x = 0
+    sidekick.y = 0
+    sidekick.speed = 2
+    sidekick.rotationAngle = 0
+    sidekick.rotationSpeed = -10
+
+    sidekick.towerPos = getTowerPos()
 end
 
 
-sidekick.distance = 150
-sidekick.angle = 0
-sidekick.x = 0
-sidekick.y = 0
-sidekick.speed = 2
-sidekick.rotationAngle = 0
-sidekick.rotationSpeed = -10
+
 
 
 
 sidekick.update = function(dt)
-    sidekick.x = math.cos(sidekick.angle) * sidekick.distance + mTower.pos.x
-    sidekick.y = math.sin(sidekick.angle) * sidekick.distance + mTower.pos.y
+    sidekick.x = math.cos(sidekick.angle) * sidekick.distance + sidekick.towerPos.x
+    sidekick.y = math.sin(sidekick.angle) * sidekick.distance + sidekick.towerPos.y
     sidekick.angle = sidekick.angle + dt * sidekick.speed
     sidekick.rotationAngle = sidekick.rotationAngle + dt * sidekick.rotationSpeed
 end
 
 sidekick.draw = function()
     love.graphics.draw(sidekick.sprite, sidekick.x, sidekick.y, sidekick.rotationAngle, 1, 1, sidekick.offset, sidekick.offset)
-    --love.graphics.print(sidekick.speed,10,10)
 end
 
 
