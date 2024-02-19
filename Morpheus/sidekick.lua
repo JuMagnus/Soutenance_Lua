@@ -2,6 +2,7 @@
 local sidekick = {}
 
 sidekick.load = function()
+
     sidekick.sprite = love.graphics.newImage("images/sidekick.png")
     sidekick.offset = sidekick.sprite:getWidth() * 0.5
 
@@ -13,15 +14,12 @@ sidekick.load = function()
     sidekick.rotationAngle = 0
     sidekick.rotationSpeed = -10
 
+    --get tower position info
     sidekick.towerPos = getTowerPos()
 end
 
-
-
-
-
-
 sidekick.update = function(dt)
+
     sidekick.x = math.cos(sidekick.angle) * sidekick.distance + sidekick.towerPos.x
     sidekick.y = math.sin(sidekick.angle) * sidekick.distance + sidekick.towerPos.y
     sidekick.angle = sidekick.angle + dt * sidekick.speed
@@ -32,7 +30,7 @@ sidekick.draw = function()
     love.graphics.draw(sidekick.sprite, sidekick.x, sidekick.y, sidekick.rotationAngle, 1, 1, sidekick.offset, sidekick.offset)
 end
 
-
+--global calling functions
 loadSidekick = function()
     sidekick.load()
 end

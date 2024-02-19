@@ -1,8 +1,5 @@
 
-
-
 local bullets = {}
-
 
 newBullet = function(x, y)
     local bullet = {}
@@ -17,13 +14,11 @@ newBullet = function(x, y)
         y = bullet.sprites.blueBullet:getHeight() * 0.5
     }
 
-
     bullet.pos = newVector(settings.screenCenterX, settings.screenCenterY)
     bullet.direction = newVector(x, y) - bullet.pos
     bullet.speed = 400
     bullet.color = getTowerColor()
     bullet.isFree = false
-
 
     bullet.update = function (dt)
         if bullet.isFree == false then
@@ -49,7 +44,7 @@ newBullet = function(x, y)
     table.insert(bullets, bullet)
 end
 
-
+--global calling functions
 updateBullets = function(dt)
     for i=1,#bullets do        
         bullets[i].update(dt)

@@ -2,8 +2,6 @@ sceneManager = {}
 local sceneList = {}
 
 
-
-
 sceneManager.addScene = function(sceneName, source)
     sceneList[sceneName] = require(source)
 end

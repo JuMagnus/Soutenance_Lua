@@ -1,18 +1,10 @@
 io.stdout:setvbuf("no")
 
-
-
 local start = {}
-
-
 
 start.load = function()
     settings.load()
     towerPos = getTowerPos()
-end
-
-start.update = function()
-
 end
 
 start.draw = function()

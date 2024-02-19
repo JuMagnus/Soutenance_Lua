@@ -5,12 +5,7 @@ io.stdout:setvbuf("no")
 
 local gameplay = {}
 
-
-
-
 gameplay.load = function()
-
-
 
     settings.load()
     loadTower()
@@ -24,11 +19,11 @@ gameplay.load = function()
     isGamePaused = false
     currentState = "fighting"
     score = 0
-
-    
+ 
 end
 
 gameplay.update = function(dt)
+
     mouseX = love.mouse.getX()
     mouseY = love.mouse.getY()
     if not settings.music:isPlaying( ) then
@@ -96,7 +91,7 @@ gameplay.draw = function()
         love.graphics.draw(settings.upgradeWindow,settings.screenCenterX,settings.screenCenterY,0,1,1,settings.upgradeOffsetX,settings.upgradeOffsetY)
         love.graphics.setFont(settings.customFont26)
         love.graphics.print("Vague "..currentWave, settings.screenCenterX-60, settings.screenCenterY-20)
-        love.graphics.print("press SPACE ", settings.screenCenterX-85, settings.screenCenterY+20)
+        love.graphics.print("press SPACE ", settings.screenCenterX-88, settings.screenCenterY+20)
     end
 
 end

@@ -47,8 +47,3 @@ waveLaunch = function(j)
     end
     currentWave = currentWave + 1
 end
-
-
-
-
---waves.windowSprite = love.graphics.newImage("Images/window.png")
