@@ -88,8 +88,9 @@ checkCollisions = function()
     local bullets = getBullets()
     local sidekick = getSidekick()
     local bulletState = false
-    for __, bullet in ipairs(bullets) do
-        for _, enemy in ipairs(enemies) do
+
+    for _, enemy in ipairs(enemies) do
+        for __, bullet in ipairs(bullets) do
             local distance = math.sqrt((enemy.pos.x - bullet.pos.x)^2 + (enemy.pos.y - bullet.pos.y)^2)
             local totalRadius = enemy.offset.x + bullet.offset.x
             if distance <= totalRadius and enemy.isFree == false and bullet.color == enemy.color and bullet.isFree == false then
@@ -105,8 +106,6 @@ checkCollisions = function()
 
             end
         end
-    end
-    for _, enemy in ipairs(enemies) do
         local distance = math.sqrt((enemy.pos.x - sidekick.x)^2 + (enemy.pos.y - sidekick.y)^2)
         local totalRadius = enemy.offset.x + sidekick.offset
         if distance <= totalRadius and enemy.isFree == false then
@@ -119,6 +118,10 @@ checkCollisions = function()
             currentEnemies = currentEnemies - 1
             score = score + 1
         end
+        
+
+
+
     end
 
 end
