@@ -12,6 +12,14 @@ settings.load = function()
     settings.titleFont = love.graphics.newFont("Fonts/OriginTech.otf", 96)
     settings.customFont26 = love.graphics.newFont("Fonts/goodTimingBd.otf", 26)
     settings.customFont14 = love.graphics.newFont("Fonts/goodTimingBd.otf", 14)
+    settings.music = love.audio.newSource("Sounds/gameplayMusic.mp3", "stream")
+    settings.laserSound = love.audio.newSource("Sounds/shoot.wav", "static")
+    settings.laserSoundClone = love.audio.newSource("Sounds/shoot.wav", "static")
+    settings.destroyedEnemy = love.audio.newSource("Sounds/destroyed.wav", "static")
+    settings.destroyedEnemyClone = love.audio.newSource("Sounds/destroyed.wav", "static")
+    settings.upgradeWindow = love.graphics.newImage("Images/upgradeW.png")
+    settings.upgradeOffsetX = settings.upgradeWindow:getWidth() * 0.5
+    settings.upgradeOffsetY = settings.upgradeWindow:getHeight() * 0.5
 
 end
 

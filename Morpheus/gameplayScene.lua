@@ -10,15 +10,6 @@ local gameplay = {}
 
 gameplay.load = function()
 
-    music = love.audio.newSource("Sounds/gameplayMusic.mp3", "stream")
-    laserSound = love.audio.newSource("Sounds/shoot.wav", "static")
-    laserSoundClone = love.audio.newSource("Sounds/shoot.wav", "static")
-    destroyedEnemy = love.audio.newSource("Sounds/destroyed.wav", "static")
-    destroyedEnemyClone = love.audio.newSource("Sounds/destroyed.wav", "static")
-
-    gameplay.upgradeWindow = love.graphics.newImage("Images/upgradeW.png")
-    gameplay.upgradeOffsetX = gameplay.upgradeWindow:getWidth() * 0.5
-    gameplay.upgradeOffsetY = gameplay.upgradeWindow:getHeight() * 0.5
 
 
     settings.load()
@@ -26,6 +17,7 @@ gameplay.load = function()
     loadSidekick()
     purgeEnemiesList()
     purgeBulletList()
+
     currentWave = 1
     waveLaunch(currentWave)
 
@@ -39,8 +31,8 @@ end
 gameplay.update = function(dt)
     mouseX = love.mouse.getX()
     mouseY = love.mouse.getY()
-    if not music:isPlaying( ) then
-		love.audio.play( music )
+    if not settings.music:isPlaying( ) then
+		love.audio.play( settings.music )
 	end
 
     if currentState == "paused" then
@@ -48,7 +40,7 @@ gameplay.update = function(dt)
     elseif currentState == "fighting" then
         isGamePaused = false
     elseif currentState == "dead" then
-        music:stop()
+        settings.music:stop()
         sceneManager.changeScene("gameOver")
     elseif currentState == "upgrade" then
         isGamePaused = true
@@ -73,13 +65,11 @@ end
 
 gameplay.keypressed = function(key)
     keypressedTower(key)
-    if key == "space" then
-        if currentState == "upgrade" then
-            waveLaunch(currentWave)
-            upgradeSidekick()
-            upgradeTower()
-            currentState = "fighting"
-        end
+    if key == "space" and currentState == "upgrade" then
+        waveLaunch(currentWave)
+        upgradeSidekick()
+        upgradeTower()
+        currentState = "fighting"
     end
     if key == "escape" and currentState == "fighting" then
         currentState = "dead"
@@ -103,7 +93,7 @@ gameplay.draw = function()
     drawEnemies()
     drawSidekick()
     if currentState == "upgrade" then
-        love.graphics.draw(gameplay.upgradeWindow,settings.screenCenterX,settings.screenCenterY,0,1,1,gameplay.upgradeOffsetX,gameplay.upgradeOffsetY)
+        love.graphics.draw(settings.upgradeWindow,settings.screenCenterX,settings.screenCenterY,0,1,1,settings.upgradeOffsetX,settings.upgradeOffsetY)
         love.graphics.setFont(settings.customFont26)
         love.graphics.print("Vague "..currentWave, settings.screenCenterX-60, settings.screenCenterY-20)
         love.graphics.print("press SPACE ", settings.screenCenterX-85, settings.screenCenterY+20)

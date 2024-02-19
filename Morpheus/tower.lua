@@ -36,10 +36,10 @@ tower.shoot = function()
     if love.mouse.isDown(1) and tower.shootingTimer <= 0 then
         tower.shootingTimer = tower.fireRate
         newBullet(mouseX, mouseY)
-        if not laserSound:isPlaying( ) then
-            laserSound:play()
+        if not settings.laserSound:isPlaying( ) then
+            settings.laserSound:play()
         else
-            laserSoundClone:play()
+            settings.laserSoundClone:play()
         end
         
     end 
@@ -95,10 +95,10 @@ checkCollisions = function()
             local totalRadius = enemy.offset.x + bullet.offset.x
             if distance <= totalRadius and enemy.isFree == false and bullet.color == enemy.color and bullet.isFree == false then
                 enemy.isFree = true
-                if not destroyedEnemy:isPlaying( ) then
-                    destroyedEnemy:play()
+                if not settings.destroyedEnemy:isPlaying( ) then
+                    settings.destroyedEnemy:play()
                 else
-                    destroyedEnemyClone:play()
+                    settings.destroyedEnemyClone:play()
                 end
                 currentEnemies = currentEnemies - 1
                 score = score + 1
@@ -110,10 +110,10 @@ checkCollisions = function()
         local totalRadius = enemy.offset.x + sidekick.offset
         if distance <= totalRadius and enemy.isFree == false then
             enemy.isFree = true
-            if not destroyedEnemy:isPlaying( ) then
-                destroyedEnemy:play()
+            if not settings.destroyedEnemy:isPlaying( ) then
+                settings.destroyedEnemy:play()
             else
-                destroyedEnemyClone:play()
+                settings.destroyedEnemyClone:play()
             end
             currentEnemies = currentEnemies - 1
             score = score + 1
@@ -146,11 +146,11 @@ upgradeTower = function()
     tower.upgrade()
 end
 
+--setters & getters
 takeDamage = function()
     tower.takeDamage()
 end
 
---getters
 getTowerHitpoints = function()
     return tower.hitPoints
 end
