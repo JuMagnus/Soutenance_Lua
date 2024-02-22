@@ -7,6 +7,10 @@ start.load = function()
     towerPos = getTowerPos()
 end
 
+start.update = function()
+
+end
+
 start.draw = function()
     settings.draw()
     love.graphics.setFont(settings.titleFont)

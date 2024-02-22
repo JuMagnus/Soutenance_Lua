@@ -24,4 +24,5 @@ sceneManager.keypressed = function(key)
     currentScene.keypressed(key)
 end
 
+
 return sceneManager

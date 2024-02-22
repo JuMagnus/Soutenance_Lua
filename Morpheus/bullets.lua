@@ -25,9 +25,6 @@ newBullet = function(x, y)
             bullet.direction = bullet.direction.normalize()
             bullet.pos = bullet.pos + bullet.direction * dt * bullet.speed
         end
-        
-    
-
     end
 
     bullet.draw = function()
@@ -37,6 +34,12 @@ newBullet = function(x, y)
             elseif bullet.color == "red" then
                 love.graphics.draw(bullet.sprites.redBullet, bullet.pos.x, bullet.pos.y, 0, 1, 1, bullet.offset.x, bullet.offset.y)
             end
+        end
+    end
+
+    bullet.upgrade = function()
+        if bullet.speed <= 600 then
+            bullet.speed = bullet.speed * 1.02
         end
     end
 
@@ -54,7 +57,9 @@ end
 drawBullets = function()
     for i=1,#bullets do        
         bullets[i].draw()
+
     end
+    
 end
 
 purgeBulletList = function()
@@ -66,3 +71,8 @@ end
 getBullets = function()
     return bullets
 end
+
+upgradeBullets = function()
+    bullet.upgrade()
+end
+

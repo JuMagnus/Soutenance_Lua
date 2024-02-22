@@ -49,7 +49,7 @@ createEnemy = function(color)
     enemy.pos = newVector(tempX, tempY)
     enemy.direction = enemy.towerPos - enemy.pos
     enemy.norm = enemy.direction.normalize()
-    enemy.speed = 70
+    enemy.speed = love.math.random(50,70)
     enemy.hitPoints = 5
     if color == "red" then
         enemy.color = "red"
@@ -65,11 +65,10 @@ createEnemy = function(color)
             enemy.dist = math.dist(enemy.pos.x,enemy.pos.y, enemy.towerPos.x,enemy.towerPos.y)
         end
         
-        if enemy.dist < enemy.towerOffset and enemy.isFree == false then
+        if #enemiesList ~= nil and enemy.dist < enemy.towerOffset and enemy.isFree == false then
             enemy.isFree = true
             currentEnemies = currentEnemies - 1
             takeDamage()
-
         end
     end
 
@@ -109,6 +108,8 @@ purgeEnemiesList = function()
     end
 end
 
+
+--getters
 getEnemies = function()
     return enemiesList
 end

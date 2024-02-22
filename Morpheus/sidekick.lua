@@ -28,6 +28,7 @@ end
 
 sidekick.draw = function()
     love.graphics.draw(sidekick.sprite, sidekick.x, sidekick.y, sidekick.rotationAngle, 1, 1, sidekick.offset, sidekick.offset)
+    love.graphics.print("sidekick rotation speed = "..sidekick.speed,10,50)
 end
 
 --global calling functions

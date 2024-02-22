@@ -16,7 +16,7 @@ tower.load = function()
         reticleX = tower.sprites.reticleBlue:getWidth() * 0.5,
         reticleY = tower.sprites.reticleBlue:getHeight() * 0.5
     }
-    tower.offsette = tower.sprites.tower:getWidth() * 0.5
+
     tower.pos = newVector((love.graphics.getWidth() * 0.5), (love.graphics.getHeight() * 0.5))
     tower.angle = 0
     tower.gunAngle = 0
@@ -41,20 +41,19 @@ tower.shoot = function()
         else
             settings.laserSoundClone:play()
         end
-        
     end 
 end
 
 tower.update = function(dt)
-    
     tower.shootingTimer = tower.shootingTimer - dt
     tower.aim(mouseX,mouseY)
     tower.shoot()
     checkCollisions()
-
 end
 
 tower.draw = function()
+
+    love.graphics.print("fire rate = "..tower.fireRate,10,30)
     love.graphics.draw(tower.sprites.tower, tower.pos.x, tower.pos.y, tower.angle, 1, 1, tower.offset.x, tower.offset.y)
     if tower.color == "blue" then
         love.graphics.draw(tower.sprites.blueGun, tower.pos.x, tower.pos.y, tower.gunAngle, 1, 1, tower.offset.x, tower.offset.y)
@@ -63,14 +62,17 @@ tower.draw = function()
         love.graphics.draw(tower.sprites.redGun, tower.pos.x, tower.pos.y, tower.gunAngle, 1, 1, tower.offset.x, tower.offset.y)
         love.graphics.draw(tower.sprites.reticleRed, mouseX, mouseY, tower.reticleAngle, 1, 1, tower.offset.reticleX, tower.offset.reticleY)
     end
+    
 end
 
 tower.keypressed = function(key)
+
     if key == "space" and tower.color == "blue" then
        tower.color = "red"
     elseif key == "space" and tower.color == "red" then
         tower.color = "blue"
     end
+
 end
 
 tower.takeDamage = function()
@@ -79,7 +81,7 @@ end
 
 tower.upgrade = function()
     tower.hitPoints = tower.hitPoints + 1
-    tower.fireRate = tower.fireRate * 0.97
+    tower.fireRate = tower.fireRate * 0.95
 end
 
 --calling functions
@@ -160,7 +162,7 @@ getTowerColor = function()
 end
 
 getTowerOffset = function()
-    return tower.offsette
+    return tower.offset.x
 end
 
 getTowerPos = function()
