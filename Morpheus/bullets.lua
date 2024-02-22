@@ -13,10 +13,10 @@ newBullet = function(x, y)
         x = bullet.sprites.blueBullet:getWidth() * 0.5,
         y = bullet.sprites.blueBullet:getHeight() * 0.5
     }
-
-    bullet.pos = newVector(settings.screenCenterX, settings.screenCenterY)
+    bullet.spawnPos = getTowerPos()
+    bullet.pos = newVector(bullet.spawnPos.x, bullet.spawnPos.y)
     bullet.direction = newVector(x, y) - bullet.pos
-    bullet.speed = 400
+    bullet.speed = 400 + (400 * (0.01 * currentWave))
     bullet.color = getTowerColor()
     bullet.isFree = false
 
@@ -35,6 +35,7 @@ newBullet = function(x, y)
                 love.graphics.draw(bullet.sprites.redBullet, bullet.pos.x, bullet.pos.y, 0, 1, 1, bullet.offset.x, bullet.offset.y)
             end
         end
+        love.graphics.print(bullets[1].speed,10,70)
     end
 
     bullet.upgrade = function()
