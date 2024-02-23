@@ -142,21 +142,23 @@ checkCollisions = function()
         end
         local distance = math.sqrt((enemy.pos.x - sidekick.x)^2 + (enemy.pos.y - sidekick.y)^2)
         local totalRadius = enemy.offset.x + sidekick.offset
-        if distance <= totalRadius and enemy.isFree == false then
+        if distance <= totalRadius and enemy.isFree == false and enemy.hitBySidekick == false then
             enemy.hitpoints = enemy.hitpoints - 1
-                if not settings.destroyedEnemy:isPlaying( ) then
-                    settings.destroyedEnemy:play()
-                else
-                    settings.destroyedEnemyClone:play()
-                end
-                if enemy.hitpoints == 0 then
-                    enemy.isFree = true
-                    currentEnemies = currentEnemies - 1
-                    score = score + 1
-                end
+            enemy.hitBySidekick = true
+            if not settings.destroyedEnemy:isPlaying( ) then
+                settings.destroyedEnemy:play()
+            else
+                settings.destroyedEnemyClone:play()
+            end
+            if enemy.hitpoints == 0 then
+                enemy.isFree = true
+                currentEnemies = currentEnemies - 1
+                score = score + 1
+            end
         end
-        
-
+        if distance > totalRadius and enemy.isFree == false and enemy.hitBySidekick == true then
+            enemy.hitBySidekick = false
+        end
 
 
     end

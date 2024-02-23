@@ -52,6 +52,7 @@ createEnemy = function(color)
     enemy.norm = enemy.direction.normalize()
     enemy.speed = 80
     enemy.hitPoints = 5
+    enemy.hitBySidekick = false
     if color == "red" then
         enemy.color = "red"
     elseif color == "blue" then
