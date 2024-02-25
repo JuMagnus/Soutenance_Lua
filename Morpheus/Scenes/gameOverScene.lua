@@ -2,7 +2,7 @@ io.stdout:setvbuf("no")
 
 local gameOver = {}
 
-require("settings")
+
 
 gameOver.load = function()
     settings.load()

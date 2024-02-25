@@ -1,19 +1,19 @@
 io.stdout:setvbuf("no")
 
 
-require("sceneManager")
-require("settings")
-require("vecteur2")
-require("tower")
-require("enemies")
-require("bullets")
-require("waves")
-require("sidekick")
+require("Scenes/sceneManager")
+require("Modules/settings")
+require("Modules/vecteur2")
+require("Modules/tower")
+require("Modules/enemies")
+require("Modules/bullets")
+require("Modules/waves")
+require("Modules/sidekick")
 
 
-sceneManager.addScene("start", "startScene")
-sceneManager.addScene("gameplay", "gameplayScene")
-sceneManager.addScene("gameOver", "gameOverScene")
+sceneManager.addScene("start", "Scenes/startScene")
+sceneManager.addScene("gameplay", "Scenes/gameplayScene")
+sceneManager.addScene("gameOver", "Scenes/gameOverScene")
 
 love.load = function()
     sceneManager.changeScene("start")
