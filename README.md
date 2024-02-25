@@ -2,12 +2,16 @@
 # Morpheus
 Projet de fin du module Lua 
 
-
-
+  
+  
 
 ## Pitch
 
 Survivez à des vagues d'ennemis de plus en plus nombreux qui cherchent à vous détruire. Choisissez judicieusement entre balles rouges ou balles bleues pour éliminer vos adversaire tout en les esquivant.
+
+## Lancement
+
+Ouvrir le dossier Morpheus depuis VSCode 
 
 
 ## Contrôles
