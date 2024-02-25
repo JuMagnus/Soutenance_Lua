@@ -46,11 +46,13 @@ createEnemy = function(color)
         tempY =  settings.screenWidth + enemy.spriteHeight
     end
 
+    enemy.hitpoints = 2
     enemy.pos = newVector(tempX, tempY)
     enemy.direction = enemy.towerPos - enemy.pos
     enemy.norm = enemy.direction.normalize()
-    enemy.speed = love.math.random(50,70)
+    enemy.speed = 80
     enemy.hitPoints = 5
+    enemy.hitBySidekick = false
     if color == "red" then
         enemy.color = "red"
     elseif color == "blue" then
@@ -61,6 +63,8 @@ createEnemy = function(color)
    
     enemy.update = function(dt)
         if #enemiesList ~= nil and enemy.isFree == false then
+            enemy.direction = enemy.towerPos - enemy.pos
+            enemy.norm = enemy.direction.normalize()
             enemy.pos = enemy.pos + enemy.norm * dt * enemy.speed
             enemy.dist = math.dist(enemy.pos.x,enemy.pos.y, enemy.towerPos.x,enemy.towerPos.y)
         end

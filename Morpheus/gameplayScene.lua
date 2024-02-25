@@ -6,20 +6,19 @@ io.stdout:setvbuf("no")
 local gameplay = {}
 
 gameplay.load = function()
-
     settings.load()
+    currentWave = 1
     loadTower()
     loadSidekick()
+    -- clean 
     purgeEnemiesList()
     purgeBulletList()
-
-    currentWave = 1
+    
     waveLaunch(currentWave)
 
     isGamePaused = false
     currentState = "fighting"
     score = 0
- 
 end
 
 gameplay.update = function(dt)
@@ -80,10 +79,6 @@ gameplay.draw = function()
 
     settings.draw()
     drawTower()
-    love.graphics.setColor(0, 0, 0)
-    love.graphics.setFont(settings.customFont14)
-    love.graphics.print(towerHitPoints,settings.screenCenterX-10,settings.screenCenterY-5)
-    love.graphics.setColor(1, 1, 1)
     drawBullets()
     drawEnemies()
     drawSidekick()
