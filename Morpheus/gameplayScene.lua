@@ -7,13 +7,13 @@ local gameplay = {}
 
 gameplay.load = function()
     settings.load()
+    currentWave = 1
     loadTower()
     loadSidekick()
     -- clean 
     purgeEnemiesList()
     purgeBulletList()
-
-    currentWave = 1
+    
     waveLaunch(currentWave)
 
     isGamePaused = false

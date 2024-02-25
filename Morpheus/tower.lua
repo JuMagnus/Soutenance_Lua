@@ -20,12 +20,13 @@ tower.load = function()
     tower.pos = newVector((love.graphics.getWidth() * 0.5), (love.graphics.getHeight() * 0.5))
     tower.angle = 0
     tower.gunAngle = 0
-    tower.moveSpeed = 300
+    tower.moveSpeed = 120 + (120 * (0.01 * currentWave))
     tower.color = "blue"
     tower.hitPoints = 20
     tower.fireRate = 1
     tower.shootingTimer = 0
     tower.reticleAngle = 0
+    tower.invincibility = false
 end
 
 tower.aim = function(mouseX,mouseY)
@@ -75,7 +76,7 @@ tower.update = function(dt)
 end
 
 tower.draw = function()
-
+    love.graphics.print("tower speed = "..tower.moveSpeed,10,90)
     love.graphics.print("fire rate = "..tower.fireRate,10,30)
     love.graphics.draw(tower.sprites.tower, tower.pos.x, tower.pos.y, tower.angle, 1, 1, tower.offset.x, tower.offset.y)
     if tower.color == "blue" then
@@ -159,8 +160,6 @@ checkCollisions = function()
         if distance > totalRadius and enemy.isFree == false and enemy.hitBySidekick == true then
             enemy.hitBySidekick = false
         end
-
-
     end
 
 end

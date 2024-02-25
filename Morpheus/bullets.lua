@@ -38,12 +38,6 @@ newBullet = function(x, y)
         love.graphics.print(bullets[1].speed,10,70)
     end
 
-    bullet.upgrade = function()
-        if bullet.speed <= 600 then
-            bullet.speed = bullet.speed * 1.02
-        end
-    end
-
 
     table.insert(bullets, bullet)
 end
@@ -73,7 +67,5 @@ getBullets = function()
     return bullets
 end
 
-upgradeBullets = function()
-    bullet.upgrade()
-end
+
 
